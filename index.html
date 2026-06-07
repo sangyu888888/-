@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoLux — 加密行情</title>
+    <link rel="stylesheet" href="styles.css?v=20260607001">
+</head>
+<body>
+    <!-- 頂部導航 -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">
+                <span class="logo-icon">◈</span>
+                <span class="logo-text">CryptoLux</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索幣種..." autocomplete="off">
+                <span class="search-icon">🔍</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="btn-alert" id="alertBtn" title="價格提醒">
+                <span>🔔</span>
+                <span class="alert-badge" id="alertBadge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- 導航標籤 -->
+    <nav class="nav-tabs">
+        <button class="tab active" data-tab="overview">📊 行情總覽</button>
+        <button class="tab" data-tab="bsc">⛓️ BSC Top 10</button>
+        <button class="tab" data-tab="eth">⟠ ETH Top 10</button>
+        <button class="tab" data-tab="alerts">🔔 提醒管理</button>
+    </nav>
+
+    <!-- 主內容區 -->
+    <main class="main-content">
+        <!-- 行情總覽 -->
+        <section class="page active" id="page-overview">
+            <!-- 顶部统计卡片 -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon">₿</div>
+                    <div class="stat-info">
+                        <div class="stat-label">BTC</div>
+                        <div class="stat-value" id="btcPrice">--</div>
+                        <div class="stat-change" id="btcChange">--</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">Ξ</div>
+                    <div class="stat-info">
+                        <div class="stat-label">ETH</div>
+                        <div class="stat-value" id="ethPrice">--</div>
+                        <div class="stat-change" id="ethChange">--</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">◆</div>
+                    <div class="stat-info">
+                        <div class="stat-label">BNB</div>
+                        <div class="stat-value" id="bnbPrice">--</div>
+                        <div class="stat-change" id="bnbChange">--</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">◎</div>
+                    <div class="stat-info">
+                        <div class="stat-label">SOL</div>
+                        <div class="stat-value" id="solPrice">--</div>
+                        <div class="stat-change" id="solChange">--</div>
+                    </div>
+                </div>
+                <div class="stat-card stat-card-ark">
+                    <div class="stat-icon ark-icon">◈</div>
+                    <div class="stat-info">
+                        <div class="stat-label">ARK</div>
+                        <div class="stat-value" id="arkPrice">--</div>
+                        <div class="stat-change" id="arkChange">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 主流幣列表 -->
+            <div class="section-title">
+                <h2>💎 主流幣行情</h2>
+                <span class="update-time" id="updateTime">更新中...</span>
+            </div>
+            <div class="table-container">
+                <table class="crypto-table" id="mainTable">
+                    <thead>
+                        <tr>
+                            <th>幣種</th>
+                            <th>價格 (USDT)</th>
+                            <th>24h 漲跌</th>
+                            <th>24h 成交量</th>
+                            <th>24h 最高</th>
+                            <th>24h 最低</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mainTableBody">
+                        <tr><td colspan="7" class="loading">載入中...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- BSC Top 10 -->
+        <section class="page" id="page-bsc">
+            <div class="section-title">
+                <h2>⛓️ BSC 流動性 Top 10</h2>
+                <span class="update-time">Binance Smart Chain</span>
+            </div>
+            <div class="table-container">
+                <table class="crypto-table" id="bscTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>幣種</th>
+                            <th>價格 (USDT)</th>
+                            <th>24h 漲跌</th>
+                            <th>24h 成交量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bscTableBody">
+                        <tr><td colspan="6" class="loading">載入中...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ETH Top 10 -->
+        <section class="page" id="page-eth">
+            <div class="section-title">
+                <h2>⟠ Ethereum 流動性 Top 10</h2>
+                <span class="update-time">Ethereum Network</span>
+            </div>
+            <div class="table-container">
+                <table class="crypto-table" id="ethTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>幣種</th>
+                            <th>價格 (USDT)</th>
+                            <th>24h 漲跌</th>
+                            <th>24h 成交量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ethTableBody">
+                        <tr><td colspan="6" class="loading">載入中...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 提醒管理 -->
+        <section class="page" id="page-alerts">
+            <div class="section-title">
+                <h2>🔔 價格提醒管理</h2>
+                <button class="btn-gold" id="addAlertBtn">+ 新增提醒</button>
+            </div>
+            <div class="alerts-list" id="alertsList">
+                <div class="empty-state">還沒有設定提醒，點擊上方按鈕新增</div>
+            </div>
+        </section>
+
+        <!-- K線圖詳情 -->
+        <section class="page" id="page-kline">
+            <div class="kline-header">
+                <button class="btn-back" id="backBtn">← 返回</button>
+                <div class="kline-symbol">
+                    <span class="kline-icon" id="klineIcon">₿</span>
+                    <div>
+                        <h2 id="klineName">BTC/USDT</h2>
+                        <span class="kline-price" id="klinePrice">$0.00</span>
+                        <span class="kline-change" id="klineChange">0%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="kline-intervals">
+                <button class="interval active" data-interval="1m">1分</button>
+                <button class="interval" data-interval="5m">5分</button>
+                <button class="interval" data-interval="15m">15分</button>
+                <button class="interval" data-interval="1h">1小時</button>
+                <button class="interval" data-interval="4h">4小時</button>
+                <button class="interval" data-interval="1d">日線</button>
+                <button class="interval" data-interval="1w">週線</button>
+            </div>
+            <div class="kline-chart-container">
+                <canvas id="klineCanvas"></canvas>
+            </div>
+            <div class="kline-stats">
+                <div class="kline-stat">
+                    <span class="ks-label">24h 最高</span>
+                    <span class="ks-value" id="kHigh">--</span>
+                </div>
+                <div class="kline-stat">
+                    <span class="ks-label">24h 最低</span>
+                    <span class="ks-value" id="kLow">--</span>
+                </div>
+                <div class="kline-stat">
+                    <span class="ks-label">24h 成交量</span>
+                    <span class="ks-value" id="kVolume">--</span>
+                </div>
+                <div class="kline-stat">
+                    <span class="ks-label">24h 成交額</span>
+                    <span class="ks-value" id="kQuoteVol">--</span>
+                </div>
+            </div>
+            <div class="kline-alert-section">
+                <button class="btn-gold" id="klineAlertBtn">🔔 設定價格提醒</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 新增提醒彈窗 -->
+    <div class="modal-overlay" id="alertModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>設定價格提醒</h3>
+                <button class="modal-close" id="closeAlertModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>幣種</label>
+                    <select id="alertSymbol">
+                        <option value="BTCUSDT">BTC/USDT</option>
+                        <option value="ETHUSDT">ETH/USDT</option>
+                        <option value="BNBUSDT">BNB/USDT</option>
+                        <option value="SOLUSDT">SOL/USDT</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>條件</label>
+                    <select id="alertCondition">
+                        <option value="above">價格高於</option>
+                        <option value="below">價格低於</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>目標價格 (USDT)</label>
+                    <input type="number" id="alertPrice" placeholder="輸入目標價格" step="any">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" id="cancelAlert">取消</button>
+                <button class="btn-gold" id="saveAlert">確認設定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提醒通知彈窗 -->
+    <div class="notification-container" id="notificationContainer"></div>
+
+    <script src="script.js?v=20260607001"></script>
+</body>
+</html>
